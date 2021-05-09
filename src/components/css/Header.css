@@ -15,3 +15,14 @@
     background-color: lightblue;
     color: #17a2b8
 }
+
+.okbro {
+    color: #17a2b8;
+    text-decoration: none;
+}
+
+okbro:hover {
+    color:#17a2b8; 
+    text-decoration:none; 
+    cursor:pointer;  
+}

@@ -2,8 +2,8 @@ import GeneralInfo from './GeneralInfo';
 import Welcome from './Welcome';
 import Login from './Login';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-
 import React, { useEffect, useState } from 'react';
+import UserWindow from './UserWindow';
 
 
 const App = () => {
@@ -38,7 +38,7 @@ const App = () => {
         return (
             <BrowserRouter>
                 <Route path="/" exact component={Welcome} />
-                {/* <Route path="/" exact component={GeneralInfo} /> */}
+                <Route path="/cases" exact component={UserWindow} />
             </BrowserRouter>
         );
     } else if (loggedIn == false) {
