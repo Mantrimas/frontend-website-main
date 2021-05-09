@@ -1,0 +1,17 @@
+.navButton {
+    width: 12.5vw;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.navButton:hover {
+    background-color: #e8ece842;
+    color: white;
+}
+
+.readButton {
+    border-color: lightblue;
+    background-color: lightblue;
+    color: #17a2b8
+}
