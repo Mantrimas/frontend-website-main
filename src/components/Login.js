@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import './css/Login.css';
 
-import { Redirect } from 'react-router-dom';
+import { Redirect, Route, Router, withRouter } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import App from './App';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState('');
     const [userName, setUsername] = useState('');
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const submit = async (e) => {
         e.preventDefault();
@@ -26,16 +33,18 @@ const Login = () => {
         });
 
         const content = await response.json();
-        setUsername(content.userName);
 
-        setRedirect(true);
+        if (!response.ok) {
+            handleShow()
+        } else {
+            setUsername(content.userName);
+            setRedirect(true);
+        }
     }
 
     if (redirect) {
-        return <Redirect to={{
-            pathname: "/",
-            state: userName
-        }} />;
+        console.log("swx");
+        return <Route path="/" exact component={App}></Route>
     }
 
     return (
@@ -77,6 +86,18 @@ const Login = () => {
                                 </div>
                             </form>
 
+                            <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Login failed</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>Please try again</Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleClose}>
+                                        Close
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+
                         </div>
                     </div>
                 </div>
@@ -85,4 +106,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default withRouter(Login);

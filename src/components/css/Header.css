@@ -8,6 +8,7 @@
 .navButton:hover {
     background-color: #e8ece842;
     color: white;
+    transition: 0.3s;
 }
 
 .readButton {
@@ -21,8 +22,16 @@
     text-decoration: none;
 }
 
-okbro:hover {
+a:hover {
+    color:#2db8ce; 
+    text-decoration: none; 
+    cursor:pointer;
+    transition: 0.3s;
+}
+
+.link {
     color:#17a2b8; 
-    text-decoration:none; 
-    cursor:pointer;  
+    text-decoration: none; 
+    cursor:pointer;
+    transition: 0.3s;
 }

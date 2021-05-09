@@ -30,7 +30,7 @@ function Header() {
 
 
           <div className="navButton" >
-            <Link to="/cases">Cases</Link>
+            <Link to="/cases" className="link">Cases</Link>
           </div>
 
           <div className="navButton" >
