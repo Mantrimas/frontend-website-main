@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './css/Login.css';
 
-import { Redirect, Route, Router, withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import App from './App';
@@ -10,7 +10,6 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState('');
-    const [userName, setUsername] = useState('');
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -37,7 +36,6 @@ const Login = () => {
         if (!response.ok) {
             handleShow()
         } else {
-            setUsername(content.userName);
             setRedirect(true);
         }
     }

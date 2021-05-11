@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Header from './Header';
+import DecisionBox from './DecisionBox';
+import CaseSingle from './CaseSingle';
+import { withRouter } from 'react-router-dom';
 
-import { Collapse, Button, CardBody, Card } from 'reactstrap';
+
+import { Collapse } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const UserWindow = (props) => {
 
-    const [cases, setCases] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
+    const [caseIds, setCaseIds] = useState('');
+    const [caseComponents, setCaseComponents] = useState('');
 
-    const toggle = () => setIsOpen(!isOpen);
-
-    const getCases = () => {
+    const getData = () => {
         (
             async () => {
                 const response = await fetch('https://localhost:44347/api/Case', {
@@ -24,57 +30,49 @@ const UserWindow = (props) => {
 
                 const content = await response.json();
 
-                var ids = [];
+                var caseIds = [];
+                var caseComponents = [];
                 content.forEach(function (entity) {
-                    ids.push(entity.id);
+                    caseIds.push(entity.id);
+                    caseComponents.push(<CaseSingle id={entity.id} />);
                 });
 
-                setCases(ids);
-
-                console.log(ids)
+                setCaseIds(caseIds);
+                setCaseComponents(caseComponents);
             }
         )();
     };
 
-    if (!cases) {
-        getCases();
+    if (!caseIds) {
+        getData();
     }
-
 
     return (
         <div>
             <Header />
-            <Container style={{ display: "flex", maxWidth: "100%", padding: "40px 55px" }}>
-                <h1 style={{ color: "lightblue" }}>Currently assigned cases</h1>
-            </Container>
-            <Container style={{display: "inline-block", padding: "0 55px"}}>
-                <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem', backgroundColor: 'lightblue', color: '#17a2b8', width: "100%" }}>{cases}</Button>
-                <Collapse isOpen={isOpen}>
-                    <Card>
-                        <CardBody>Case Description</CardBody>
-                    </Card>
-                </Collapse>
-            </Container>
 
-            <Container style={{display: "inline-block", padding: "0 55px"}}>
-                <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem', backgroundColor: 'lightblue', color: '#17a2b8', width: "100%" }}>{cases}</Button>
-                <Collapse isOpen={isOpen}>
-                    <Card>
-                        <CardBody>Case Description</CardBody>
-                    </Card>
-                </Collapse>
-            </Container>
+            <Container style={{ maxWidth: "100%" }}>
+                <Row>
+                    <Col xs={8}>
+                        <Container style={{ maxWidth: "100%" }}>
+                            <Container style={{ display: "flex", maxWidth: "100%", padding: "40px 55px" }}>
+                                <h1 style={{ color: "lightblue" }}>Currently assigned cases</h1>
+                            </Container>
 
-            <Container style={{display: "inline-block", padding: "0 55px"}}>
-                <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem', backgroundColor: 'lightblue', color: '#17a2b8', width: "100%" }}>{cases}</Button>
-                <Collapse isOpen={isOpen}>
-                    <Card>
-                        <CardBody>Case Description</CardBody>
-                    </Card>
-                </Collapse>
+                            <Container style={{ marginLeft: "50px", display: "inline-block", backgroundColor: "#add8e669", padding: "50px" }}>
+                                {caseComponents}
+                            </Container>
+                        </Container>
+                    </Col>
+                    <Col xs={4} style={{ marginTop: "2.5vw" }}>
+                        <Container style={{ height: "100%" }}>
+                            <DecisionBox />
+                        </Container>
+                    </Col>
+                </Row>
             </Container>
         </div>
     );
 }
 
-export default UserWindow;
+export default withRouter(UserWindow);

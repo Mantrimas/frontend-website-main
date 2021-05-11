@@ -2,7 +2,7 @@ import './css/Header.css';
 import './css/Login.css';
 import Welcome from './Welcome';
 
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, withRouter } from 'react-router-dom';
 
 
 function Header() {
@@ -49,4 +49,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default withRouter(Header);

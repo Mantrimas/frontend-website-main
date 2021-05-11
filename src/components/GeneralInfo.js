@@ -8,40 +8,27 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import React, { useEffect, useState } from 'react';
-import { useLocation, withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
+import getDataById from '../helpers/getCaseData';
 
 const GeneralInfo = (props) => {
     const [descriptions, setDescriptions] = useState('');
     const [flags, setFlags] = useState('');
     const [caseNumber, setCaseNumber] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
-    const [caseId, setCaseId] = useState('');
+    const [customerId, setCustomerId] = useState('');
 
-    console.log(props.match.params.id);
+    //getDataById(id);
 
-    const getDataById = (id) => {
-        (
-            async () => {
-                const response = await fetch('https://localhost:44347/api/Case/' + id, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*'
-                    },
-                    credentials: 'include'
-                });
-
-                const content = await response.json();
-
-                setCaseNumber(content.caseNumber);
-                setDescriptions(content.description);
-                setFlags(content.activityFlag);
-            }
-        )();
-    };
-
+    const setStates = (content) => {
+        setCaseNumber(content.caseNumber);
+        setDescriptions(content.description);
+        setFlags(content.activityFlag);
+        setCustomerId(content.customerId);
+    }
+    
     if (!descriptions) {
-        getDataById(props.match.params.id);
+        getDataById(props.match.params.id, setStates);
     }
 
     return (
@@ -52,7 +39,7 @@ const GeneralInfo = (props) => {
                 <Col xs={8}>
                     <Container>
                         <CaseStatus id={caseNumber} />
-                        <CaseInfo />
+                        <CaseInfo custId={customerId} />
                         <AccountInfo />
                     </Container>
                 </Col>

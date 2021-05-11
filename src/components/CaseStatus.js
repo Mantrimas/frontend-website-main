@@ -1,13 +1,14 @@
 import Container from 'react-bootstrap/Container';
 
 
-function CaseStatus() {
+const CaseStatus = (props) => {
   return (
     <Container className="p-3" style={{
         marginTop: "2.5vw",
         border: "1px solid black",
+        backgroundColor: 'lightblue'
     }}>
-        Weird behaviour
+        You are currently viewing case no. {props.id}
     </Container>
   );
 }
