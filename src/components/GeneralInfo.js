@@ -3,6 +3,8 @@ import CaseStatus from './CaseStatus';
 import AccountInfo from './AccountInfo';
 import DecisionBox from './DecisionBox';
 import Header from './Header';
+import Inflow from './Inflow';
+import TransactionInfo from './TransactionInfo';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -18,11 +20,9 @@ const GeneralInfo = (props) => {
 
     const setStates = (data) => {
         setContent(data);
-        console.log(data);
     }
  
     useEffect(() => {
-        console.log("hello");
         if (!content) {
             getDataById(props.match.params.id, setStates);
         }
@@ -44,6 +44,7 @@ const GeneralInfo = (props) => {
                             <Container>
                                 <CaseStatus id={content.caseNumber} />
                                 <CaseInfo custId={content.customerId} />
+                                <Inflow />
                                 <AccountInfo />
                             </Container>
                         </Col>
@@ -54,6 +55,7 @@ const GeneralInfo = (props) => {
                         </Col>
                     </Row>
                 </Container>
+                <TransactionInfo custId={content.customerId} />
             </div>
         );
     }

@@ -33,7 +33,7 @@ const CaseInfo = (props) => {
         return (
             <Container className="p-5 customerInfo" >
                 <Row>
-                    <Col  style={{
+                    <Col style={{
                         padding: "2px",
                         height: "200px"
                     }}>
@@ -77,26 +77,6 @@ const CaseInfo = (props) => {
                             </Row>
                         </Container>
                     </Col>
-                    {/* <Col sm={6} style={{
-                        padding: "2px",
-                        height: "200px",
-                    }} md={{ offset: 1 }}>
-                        <Container style={{
-                            padding: "2px",
-                            paddingBottom: "7.5px",
-                            color: "darkcyan"
-                        }}>
-                            Inflow overview
-                    </Container>
-                        <Container style={{
-                            backgroundColor: "lightblue",
-                            paddingTop: "15px",
-                            paddingBottom: "15px",
-                            borderRadius: "3%"
-                        }}>
-                            <h4>{content.name} {content.lastName}</h4>
-                        </Container>
-                    </Col> */}
                 </Row>
             </Container>
         );

@@ -49,7 +49,6 @@ const DecisionBox = (props) => {
 
     const setStates = (contents) => {
         setContent(contents);
-        console.log(contents);
         var commentArray = [];
         contents.forEach(function (entity) {
             commentArray.push(<Comment message={entity.comment} />);
