@@ -1,7 +1,7 @@
-const getCustomerData = (id, callback) => {
+const logout = (callback) => {
     (
         async () => {
-            const response = await fetch('https://localhost:44347/api/Customer/' + id, {
+            const response = await fetch('https://localhost:44347/api/AuthManagement/Logout', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'
@@ -9,11 +9,11 @@ const getCustomerData = (id, callback) => {
                 credentials: 'include'
             });
 
-            const content = await response.json();
-
-            callback(content);
+            if (response.ok) {
+                callback();
+            }
         }
     )();
 };
 
-export default getCustomerData;
+export default logout;

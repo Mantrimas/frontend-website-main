@@ -1,0 +1,7 @@
+.customerInfo {
+    margin-top: 2.5vw;
+    background-color: #add8e669;
+    color: #17a2b8;
+    padding: 35px 50px 120px 50px !important;
+    overflow: auto;
+}

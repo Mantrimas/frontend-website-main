@@ -1,11 +1,17 @@
 import './css/Header.css';
 import './css/Login.css';
-import Welcome from './Welcome';
+import logout from '../helpers/logout';
 
-import { BrowserRouter, Route, Link, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Link, withRouter, useHistory } from 'react-router-dom';
 
+const Header = (props) => {
 
-function Header() {
+  const history = useHistory()
+
+  const logoutHandler = () => {
+    logout(history.go());
+  }
+
   return (
     <div className="Header">
       <div style={{
@@ -42,7 +48,7 @@ function Header() {
           </div>
 
           <div className="navButton" style={{ justifyContent: "end", width: "40%", paddingRight: "20px" }} >
-            <div>Log Out</div>
+          <Link to="/" className="link" onClick={logoutHandler}>Log Out</Link>
           </div>
       </div>
     </div>

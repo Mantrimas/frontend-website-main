@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Route, Redirect, Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { Collapse } from 'reactstrap';
 import { Card, CardBody } from 'reactstrap';
@@ -9,41 +9,46 @@ import getDataById from '../helpers/getCaseData';
 
 
 const CaseSingle = (props) => {
-    const [descriptions, setDescriptions] = useState('');
-    const [flags, setFlags] = useState('');
-    const [caseNumber, setCaseNumber] = useState('');
+    const [content, setContent] = useState('');
+    const [loading, setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
-    const [caseId, setCaseId] = useState('');
 
     const toggle = () => setIsOpen(!isOpen);
 
-    const setStates = (content) => {
-        setCaseNumber(content.caseNumber);
-        setDescriptions(content.description);
-        setFlags(content.activityFlag);
-        setCaseId(props.id);
+    const setStates = (data) => {
+        setContent(data);
     }
 
-    if (!descriptions) {
-        getDataById(props.id, setStates);
-    }
+    useEffect(() => {
+        if (!content) {
+            getDataById(props.id, setStates);
+        }
+        else {
+            setLoading(false);
+        }
+    });
 
-    return (
-        <Container style={{ display: "inline-block", padding: "0 55px" }}>
-            <Button color="primary" onClick={toggle} style={{ textAlign: "inherit", marginBottom: '1rem', backgroundColor: 'lightblue', color: '#17a2b8', width: "100%" }}>Case No. {caseNumber}</Button>
-            <Collapse isOpen={isOpen}>
-                <Card>
-                    <CardBody>
-                        <p>{descriptions}</p>
-                        <p>Activity flag: {flags}</p>
-                        <Link to={`/cases/current/${caseId}`}>
-                            <Button color="warning">Open</Button>
-                        </Link>
-                    </CardBody>
-                </Card>
-            </Collapse>
-        </Container>
-    )
+    if (loading) {
+        return ("Loading...")
+    }
+    else {
+        return (
+            <Container style={{ display: "inline-block", padding: "0 55px" }}>
+                <Button color="primary" onClick={toggle} style={{ textAlign: "inherit", marginBottom: '1rem', backgroundColor: 'lightblue', color: '#17a2b8', width: "100%" }}>Case No. {content.caseNumber}</Button>
+                <Collapse isOpen={isOpen}>
+                    <Card>
+                        <CardBody>
+                            <p>{content.description}</p>
+                            <p>Activity flag: {content.activityFlag}</p>
+                            <Link to={`/cases/current/${props.id}`}>
+                                <Button color="warning">Open</Button>
+                            </Link>
+                        </CardBody>
+                    </Card>
+                </Collapse>
+            </Container>
+        )
+    }
 }
 
 export default withRouter(CaseSingle);

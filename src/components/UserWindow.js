@@ -14,8 +14,9 @@ import Col from 'react-bootstrap/Col';
 
 const UserWindow = (props) => {
 
-    const [caseIds, setCaseIds] = useState('');
-    const [caseComponents, setCaseComponents] = useState('');
+    const [openCaseIds, setOpenCaseIds] = useState('');
+    const [openCaseComponents, setOpenCaseComponents] = useState('');
+    const [closedCaseComponents, setClosedCaseComponents] = useState('');
 
     const getData = () => {
         (
@@ -30,20 +31,29 @@ const UserWindow = (props) => {
 
                 const content = await response.json();
 
-                var caseIds = [];
-                var caseComponents = [];
+                var openCaseIds = [];
+                var openCaseComponents = [];
+                var closedCaseIds = [];
+                var closedCaseComponents = [];
+
                 content.forEach(function (entity) {
-                    caseIds.push(entity.id);
-                    caseComponents.push(<CaseSingle id={entity.id} />);
+                    if (entity.caseStatus == 0) {
+                        //openCaseIds.push(entity.id);
+                        openCaseComponents.push(<CaseSingle id={entity.id} />);
+                    } else {
+                        //closedCaseIds.push(entity.id);
+                        closedCaseComponents.push(<CaseSingle id={entity.id} />);
+                    }
                 });
 
-                setCaseIds(caseIds);
-                setCaseComponents(caseComponents);
+                //setOpenCaseIds(openCaseIds);
+                setOpenCaseComponents(openCaseComponents);
+                setClosedCaseComponents(closedCaseComponents);
             }
         )();
     };
 
-    if (!caseIds) {
+    if (!openCaseComponents) {
         getData();
     }
 
@@ -60,14 +70,29 @@ const UserWindow = (props) => {
                             </Container>
 
                             <Container style={{ marginLeft: "50px", display: "inline-block", backgroundColor: "#add8e669", padding: "50px" }}>
-                                {caseComponents}
+                                {openCaseComponents}
                             </Container>
                         </Container>
                     </Col>
                     <Col xs={4} style={{ marginTop: "2.5vw" }}>
-                        <Container style={{ height: "100%" }}>
+                        {/* <Container style={{ height: "100%" }}>
                             <DecisionBox />
+                        </Container> */}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={8}>
+                        <Container style={{ maxWidth: "100%" }}>
+                            <Container style={{ display: "flex", maxWidth: "100%", padding: "40px 55px" }}>
+                                <h1 style={{ color: "lightblue" }}>Closed cases</h1>
+                            </Container>
+
+                            <Container style={{ marginLeft: "50px", display: "inline-block", backgroundColor: "#add8e669", padding: "50px" }}>
+                                {closedCaseComponents}
+                            </Container>
                         </Container>
+                    </Col>
+                    <Col xs={4} style={{ marginTop: "2.5vw" }}>
                     </Col>
                 </Row>
             </Container>

@@ -1,7 +1,7 @@
 import GeneralInfo from './GeneralInfo';
 import Welcome from './Welcome';
 import Login from './Login';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import UserWindow from './UserWindow';
 
@@ -20,7 +20,7 @@ const App = () => {
                     credentials: 'include'
                 });
 
-                console.log(response.ok);
+                // console.log(response.ok);
 
                 if (response.ok) {
                     setLoggedIn(true);
@@ -43,7 +43,9 @@ const App = () => {
         return (
             <BrowserRouter>
                 <Route path="/" exact component={Login} />
+                <Redirect to={{ pathname: '/' }} />
             </BrowserRouter>
+            
         );
     } else {
         return (<div></div>)
