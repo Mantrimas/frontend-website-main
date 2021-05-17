@@ -44,8 +44,8 @@ const GeneralInfo = (props) => {
                             <Container>
                                 <CaseStatus id={content.caseNumber} />
                                 <CaseInfo custId={content.customerId} />
-                                <Inflow />
-                                <AccountInfo />
+                                <Inflow custId={content.customerId} />
+                                <AccountInfo custId={content.customerId} />
                             </Container>
                         </Col>
                         <Col xs={4} style={{ marginTop: "2.5vw" }}>

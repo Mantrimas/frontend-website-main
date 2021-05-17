@@ -7,6 +7,15 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import getDataById from '../helpers/getCaseData';
 
+const activityFlag = {
+    0: "Unusual Behaviour",
+    1: "Unusual Cash Deposit",
+    2: "Unusual Recurring Cash Deposit",
+    3: "Unusual Withdrawal Amount",
+    4: "Unusual Deposit Amount",
+    5: "KYCMissing",
+    6: "MissingInformation"
+  }
 
 const CaseSingle = (props) => {
     const [content, setContent] = useState('');
@@ -39,7 +48,7 @@ const CaseSingle = (props) => {
                     <Card>
                         <CardBody>
                             <p>{content.description}</p>
-                            <p>Activity flag: {content.activityFlag}</p>
+                            <p>Activity flag: {activityFlag[content.activityFlag]}</p>
                             <Link to={`/cases/current/${props.id}`}>
                                 <Button color="warning">Open</Button>
                             </Link>

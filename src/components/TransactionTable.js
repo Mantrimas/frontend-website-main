@@ -15,21 +15,13 @@ const txType = {
 
 const DatatablePage = (props) => {
   const [tableData, setTableData] = useState('');
-  // const [transactions, setTransactions] = useState('');
-  const [ligma, setLigma] = useState('');
   const [loading, setLoading] = useState(true);
 
   const setStates = (content) => {
-    //setTransactions(content);
-
     setTable(content);
   }
 
   const setTable = (transactions) => {
-
-    // console.log("paziurim verte before setting data")
-    // console.log(transactions);
-
     transactions.forEach(obj => {
       Object.keys(obj).forEach((key) => {
         if (key == "accountId") {
@@ -40,6 +32,9 @@ const DatatablePage = (props) => {
             setLoading('true');
           }
           getAccountNumber(obj[key], accountId)
+        }
+        if (key == "date") {
+          obj[key] = obj[key].split("T")[0]
         }
         if (key == "transactionType") {
           obj[key] = txType[obj[key]];
@@ -52,7 +47,7 @@ const DatatablePage = (props) => {
         {
           label: 'Date',
           field: 'date',
-          sort: 'asc',
+          sort: 'dsc',
           width: 150
         },
         {
@@ -82,33 +77,9 @@ const DatatablePage = (props) => {
       ],
       rows: transactions
     };
-
-    console.log("WTF NX");
-    console.log(data);
+    
     setTableData(data);
   }
-
-  // const tryAgain = () => {
-
-  //   tableData.rows.forEach(obj => {
-  //     Object.keys(obj).forEach((key) => {
-  //       if (key == "accountId") {
-  //         let testukas = '';
-  //         const accountId = (result) => {
-  //           //console.log(result.accountNumber);
-  //           testukas = result.accountNumber;
-  //           obj[key] = testukas;
-  //           //console.log(obj[key]);
-  //         }
-  //         getAccountNumber(obj[key], accountId)
-  //       }
-  //     });
-  //   });
-
-  //   setTableData(tableData);
-  //   setLoading(false);
-
-  // }
 
   useEffect(() => {
     if (!tableData) {
@@ -128,6 +99,7 @@ const DatatablePage = (props) => {
         striped
         bordered
         small
+        sortRows={['date']}
         data={tableData}
       />
     );

@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Header from './Header';
-import DecisionBox from './DecisionBox';
 import CaseSingle from './CaseSingle';
 import { withRouter } from 'react-router-dom';
 
-
-import { Collapse } from 'reactstrap';
-import { Card, CardBody } from 'reactstrap';
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const UserWindow = (props) => {
 
-    const [openCaseIds, setOpenCaseIds] = useState('');
     const [openCaseComponents, setOpenCaseComponents] = useState('');
     const [closedCaseComponents, setClosedCaseComponents] = useState('');
 
@@ -31,22 +25,17 @@ const UserWindow = (props) => {
 
                 const content = await response.json();
 
-                var openCaseIds = [];
                 var openCaseComponents = [];
-                var closedCaseIds = [];
                 var closedCaseComponents = [];
 
                 content.forEach(function (entity) {
                     if (entity.caseStatus == 0) {
-                        //openCaseIds.push(entity.id);
                         openCaseComponents.push(<CaseSingle id={entity.id} />);
                     } else {
-                        //closedCaseIds.push(entity.id);
                         closedCaseComponents.push(<CaseSingle id={entity.id} />);
                     }
                 });
 
-                //setOpenCaseIds(openCaseIds);
                 setOpenCaseComponents(openCaseComponents);
                 setClosedCaseComponents(closedCaseComponents);
             }
@@ -60,7 +49,6 @@ const UserWindow = (props) => {
     return (
         <div>
             <Header />
-
             <Container style={{ maxWidth: "100%" }}>
                 <Row>
                     <Col xs={8}>
@@ -75,9 +63,6 @@ const UserWindow = (props) => {
                         </Container>
                     </Col>
                     <Col xs={4} style={{ marginTop: "2.5vw" }}>
-                        {/* <Container style={{ height: "100%" }}>
-                            <DecisionBox />
-                        </Container> */}
                     </Col>
                 </Row>
                 <Row>

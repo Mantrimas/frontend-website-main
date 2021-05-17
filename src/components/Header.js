@@ -40,11 +40,7 @@ const Header = (props) => {
           </div>
 
           <div className="navButton" >
-            <div>Customers  </div>
-          </div>
-
-          <div className="navButton" >
-            <div>Tools</div>
+            <Link to="/customers" className="link">Customers</Link>
           </div>
 
           <div className="navButton" style={{ justifyContent: "end", width: "40%", paddingRight: "20px" }} >

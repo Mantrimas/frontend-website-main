@@ -4,6 +4,7 @@ import Login from './Login';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import UserWindow from './UserWindow';
+import CustomerList from './CustomerList';
 
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
                 <Route path="/" exact component={Welcome} />
                 <Route path="/cases" exact component={UserWindow} />
                 <Route path="/cases/current/:id" exact component={GeneralInfo} />
+                <Route path="/customers" exact component={CustomerList} />
             </BrowserRouter>
         );
     } else if (loggedIn == false) {

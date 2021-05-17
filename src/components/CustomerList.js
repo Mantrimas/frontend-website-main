@@ -1,20 +1,25 @@
 import Container from 'react-bootstrap/Container';
-import TransactionTable from './TransactionTable';
+import CustomerTable from './CustomerTable';
+import Header from './Header';
 
-const TransactionInfo = (props) => {
+const CustomerList = (props) => {
   return (
+    <>
+    <Header />
     <Container className="p-3" style={{
         marginTop: "2.5vw",
         backgroundColor: "#add8e669",
         color: "#17a2b8",
+        height: '500px',
         marginBottom: "200px",
         maxWidth: '90%'
     }}>
-        Transaction Information
-      <br></br>
-        <TransactionTable custId={props.custId}/>
+        Customer List
+
+        <CustomerTable/>
     </Container>
+    </>
   );
 }
 
-export default TransactionInfo;
+export default CustomerList;
