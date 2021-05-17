@@ -20,7 +20,6 @@ const AccountInfo = (props) => {
   useEffect(() => {
     if (!accounts) {
       getAccounts(props.custId, setStates);
-      console.log("use efekt");
     }
     else {
       setLoading(false);

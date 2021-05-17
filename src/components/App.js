@@ -21,8 +21,6 @@ const App = () => {
                     credentials: 'include'
                 });
 
-                // console.log(response.ok);
-
                 if (response.ok) {
                     setLoggedIn(true);
                 } else {

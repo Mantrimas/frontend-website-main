@@ -41,7 +41,6 @@ const Login = () => {
     }
 
     if (redirect) {
-        console.log("swx");
         return <Route path="/" exact component={App}></Route>
     }
 
